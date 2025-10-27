@@ -84,13 +84,13 @@ function Management() {
         </div>
 
         <div className='management-container'>
-          <p>1. theme</p>
+          <p>1. 테마</p>
           <Toggle options={themes} selected={theme} onSelect={setTheme} />
 
-          <p>2. your task</p>
+          <p>2. 할 일</p>
           <TaskInput value={task} onChange={(e) => setTask(e.target.value)} />
 
-          <p>3. importance</p>
+          <p>3. 중요도</p>
           <Priority initial={priority} onChange={setPriority} />
         </div>
       </div>
