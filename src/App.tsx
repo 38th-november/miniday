@@ -13,17 +13,19 @@ function AppRoutes() {
   const { todoList } = useContext(TodoContext);
 
   return (
-    <>
-      <Routes>
-        <Route element={<MainLayout />}>
-          <Route path='/' element={todoList.length > 0 ? <History /> : <EmptyMain />} />
-          <Route path='/add' element={<Add />} />
-          <Route path='/history' element={<History />} />
-          <Route path='/management/:id' element={<Management />} />
-        </Route>
-      </Routes>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <div style={{ flex: 1 }}>
+        <Routes>
+          <Route element={<MainLayout />}>
+            <Route path='/' element={todoList.length > 0 ? <History /> : <EmptyMain />} />
+            <Route path='/add' element={<Add />} />
+            <Route path='/history' element={<History />} />
+            <Route path='/management/:id' element={<Management />} />
+          </Route>
+        </Routes>
+      </div>
       <Footer />
-    </>
+    </div>
   );
 }
 
