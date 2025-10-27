@@ -34,7 +34,7 @@ const notifyFlutter = (action: string, key?: string, value?: string) => {
         })
       );
     }
-  } catch (error) {
+  } catch {
     // Flutter 환경이 아닐 경우 무시
     console.log('Not in Flutter environment');
   }
@@ -60,8 +60,8 @@ export const TodoProvider = ({ children }: { children: ReactNode }) => {
       // Flutter에 저장 알림 (이미 localStorage.setItem이 오버라이드되어 있으면 자동으로 전송됨)
       // 추가로 명시적으로 전송
       notifyFlutter('save', 'todoList', todoListString);
-    } catch (error) {
-      console.error('Failed to save todo list:', error);
+    } catch {
+      console.error('Failed to save todo list');
     }
   }, [todoList]);
 
