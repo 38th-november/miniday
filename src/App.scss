@@ -1,12 +1,25 @@
 @import url('https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.1/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css');
 
-html,
-body {
+html {
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-image: url('./assets/images/bg_paper3.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: 'Wanted Sans', sans-serif;
 }
 
 #root {
@@ -18,17 +31,9 @@ body {
   display: flex;
   flex-direction: column;
 }
+
 *,
 *::before,
 *::after {
   box-sizing: inherit;
-}
-
-body {
-  background-image: url('./assets/images/bg_paper3.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-attachment: fixed;
-  font-family: 'Wanted Sans', sans-serif;
 }
