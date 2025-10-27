@@ -3,14 +3,14 @@
 }
 
 .header-logo {
-  width: 150px;
+  width: 130px;
   height: auto;
   transition: width 0.3s ease;
   cursor: pointer;
 
   // 태블릿 (768px 이상)
   @media (min-width: 768px) {
-    width: 150px;
+    width: 140px;
   }
 
   // 데스크탑 (1024px 이상)
