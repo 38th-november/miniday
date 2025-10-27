@@ -1,0 +1,68 @@
+.todo-card {
+  width: 100%;
+  background: #f5f5f5;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  padding: 16px;
+  margin-bottom: 20px;
+  transition:
+    background 0.3s,
+    opacity 0.3s;
+
+  .todo-card-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+
+    .todo-task {
+      flex: 1;
+      min-width: 0;
+      font-size: 14px;
+      color: #333;
+      word-break: keep-all;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .todo-priority {
+      display: flex;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .heart-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    .on-off-btn {
+      flex-shrink: 0;
+      width: 70px;
+      padding: 6px 10px;
+      font-size: 12px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      color: #ffffff;
+      background-color: #b0b0b0;
+
+      &.active {
+        background-color: #42799a;
+        color: #ffffff;
+      }
+
+      &:hover {
+        opacity: 0.85;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}

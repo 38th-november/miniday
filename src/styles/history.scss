@@ -1,0 +1,78 @@
+.history-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  .todo-theme {
+    font-size: 15px;
+    font-weight: 600;
+    color: #000000b7;
+  }
+
+  .history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h3 {
+      font-size: 16px;
+      font-weight: 700;
+      background: linear-gradient(150deg, #000000 0%, #4e4e4e 100%);
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      transition: all 0.25s ease;
+
+      @media (min-width: 768px) {
+        font-size: 18px;
+      }
+
+      @media (min-width: 1024px) {
+        font-size: 20px;
+      }
+    }
+
+    .theme-select {
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+      background-color: #fff;
+      color: #333;
+      cursor: pointer;
+      transition: border-color 0.2s ease-in-out;
+
+      &:hover {
+        border-color: #999;
+      }
+
+      &:focus {
+        outline: none;
+        border-color: #2a2a2a;
+      }
+    }
+  }
+
+  .empty-message {
+    color: #999;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 40px;
+  }
+}
+
+.todo-clickable {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.add-button-container {
+  display: flex;
+  justify-content: center;
+}

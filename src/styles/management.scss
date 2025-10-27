@@ -1,0 +1,73 @@
+.management-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+
+  .management-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h3 {
+      font-size: 16px;
+      font-weight: 700;
+      background: linear-gradient(150deg, #000000 0%, #4e4e4e 100%);
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      transition: all 0.25s ease;
+
+      @media (min-width: 768px) {
+        font-size: 18px;
+      }
+
+      @media (min-width: 1024px) {
+        font-size: 20px;
+      }
+    }
+
+    span {
+      font-size: 14px;
+      color: #666;
+    }
+  }
+}
+.mg-bottom-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  .button-with-tooltip {
+    position: relative;
+    display: inline-block;
+
+    .edit-text {
+      position: absolute;
+      bottom: 100%;
+      transform: translateX(0%) translateY(-10px);
+      font-size: 13px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+      white-space: nowrap;
+      letter-spacing: -1px;
+
+      @media (min-width: 768px) {
+        font-size: 14px;
+      }
+
+      // 데스크탑 (1024px 이상)
+      @media (min-width: 1024px) {
+        font-size: 14px;
+      }
+    }
+
+    &:hover .edit-text {
+      opacity: 1;
+    }
+  }
+}
