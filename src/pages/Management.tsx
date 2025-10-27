@@ -84,13 +84,13 @@ function Management() {
         </div>
 
         <div className='management-container'>
-          <p>theme.</p>
+          <p>1. theme</p>
           <Toggle options={themes} selected={theme} onSelect={setTheme} />
 
-          <p>your task.</p>
+          <p>2. your task</p>
           <TaskInput value={task} onChange={(e) => setTask(e.target.value)} />
 
-          <p>importance.</p>
+          <p>3. importance</p>
           <Priority initial={priority} onChange={setPriority} />
         </div>
       </div>

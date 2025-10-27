@@ -50,13 +50,13 @@ function Add() {
     <>
       <div className='add-box'>
         <div className='add-container'>
-          <p>Pick a theme.</p>
+          <p>1. 테마를 선택하세요.</p>
           <Toggle options={themes} selected={theme} onSelect={setTheme} />
 
-          <p>Enter your task.</p>
+          <p>2. 할 일을 입력하세요.</p>
           <TaskInput value={task} onChange={(e) => setTask(e.target.value)} />
 
-          <p>Fill in the hearts based on importance.</p>
+          <p>3. 얼마나 중요한 일인가요?</p>
           <Priority initial={priority} onChange={setPriority} />
         </div>
       </div>
