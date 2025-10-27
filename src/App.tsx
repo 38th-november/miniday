@@ -30,7 +30,7 @@ function AppRoutes() {
 function App() {
   return (
     <TodoProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/miniday">
         <AppRoutes />
       </BrowserRouter>
     </TodoProvider>
