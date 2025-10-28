@@ -1,11 +1,50 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 export const TodoContext = createContext({
     todoList: [],
     setTodoList: () => { },
 });
+// Flutter와 통신하는 헬퍼 함수
+const notifyFlutter = (action, key, value) => {
+    try {
+        // Flutter WebView의 JavaScriptChannel로 메시지 전송
+        if (window.FlutterStorage && window.FlutterStorage.postMessage) {
+            window.FlutterStorage.postMessage(JSON.stringify({
+                action,
+                key,
+                value,
+            }));
+        }
+    }
+    catch {
+        // Flutter 환경이 아닐 경우 무시
+        console.log('Not in Flutter environment');
+    }
+};
 export const TodoProvider = ({ children }) => {
-    const [todoList, setTodoList] = useState([]);
+    const [todoList, setTodoList] = useState(() => {
+        // 초기 로드 시 localStorage에서 데이터 가져오기
+        try {
+            const saved = localStorage.getItem('todoList');
+            return saved ? JSON.parse(saved) : [];
+        }
+        catch {
+            return [];
+        }
+    });
+    // todoList가 변경될 때마다 localStorage에 저장하고 Flutter에 알림
+    useEffect(() => {
+        try {
+            const todoListString = JSON.stringify(todoList);
+            localStorage.setItem('todoList', todoListString);
+            // Flutter에 저장 알림 (이미 localStorage.setItem이 오버라이드되어 있으면 자동으로 전송됨)
+            // 추가로 명시적으로 전송
+            notifyFlutter('save', 'todoList', todoListString);
+        }
+        catch {
+            console.error('Failed to save todo list');
+        }
+    }, [todoList]);
     return _jsx(TodoContext.Provider, { value: { todoList, setTodoList }, children: children });
 };

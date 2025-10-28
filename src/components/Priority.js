@@ -1,37 +1,26 @@
-import { jsx as _jsx } from 'react/jsx-runtime';
+import { jsx as _jsx } from "react/jsx-runtime";
 import { useState, useEffect } from 'react';
 import ideaGray from '../assets/icons/icon_idea_gray.png';
 import ideaColor from '../assets/icons/icon_idea_color.png';
 import '../styles/priority.scss';
 const MAX_SCORE = 5;
 const Priority = ({ initial = 0, onChange }) => {
-  const [score, setScore] = useState(initial);
-  useEffect(() => {
-    setScore(initial);
-  }, [initial]);
-  const handleClick = (value) => {
-    let newScore;
-    if (value === score) {
-      newScore = value - 1;
-    } else {
-      newScore = value;
-    }
-    setScore(newScore);
-    if (onChange) onChange(newScore);
-  };
-  return _jsx('div', {
-    className: 'priority-container',
-    children: Array.from({ length: MAX_SCORE }, (_, i) => i + 1).map((i) =>
-      _jsx(
-        'button',
-        {
-          className: 'priority-btn',
-          onClick: () => handleClick(i),
-          children: _jsx('img', { src: i <= score ? ideaColor : ideaGray, alt: `priority ${i}` }),
-        },
-        i,
-      ),
-    ),
-  });
+    const [score, setScore] = useState(initial);
+    useEffect(() => {
+        setScore(initial);
+    }, [initial]);
+    const handleClick = (value) => {
+        let newScore;
+        if (value === score) {
+            newScore = value - 1;
+        }
+        else {
+            newScore = value;
+        }
+        setScore(newScore);
+        if (onChange)
+            onChange(newScore);
+    };
+    return (_jsx("div", { className: 'priority-container', children: Array.from({ length: MAX_SCORE }, (_, i) => i + 1).map((i) => (_jsx("button", { className: 'priority-btn', onClick: () => handleClick(i), children: _jsx("img", { src: i <= score ? ideaColor : ideaGray, alt: `priority ${i}` }) }, i))) }));
 };
 export default Priority;
