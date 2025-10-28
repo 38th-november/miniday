@@ -6,10 +6,21 @@
   justify-content: flex-start;
   margin-top: 20px;
 
+  .theme-group {
+    margin-bottom: 20px;
+  }
+
   .todo-theme {
     font-size: 15px;
     font-weight: 600;
     color: #000000b7;
+    margin-bottom: 10px;
+  }
+
+  .theme-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 
   .history-header {
@@ -42,15 +53,29 @@
       }
     }
 
+    .filter-group {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
     .theme-select {
       padding: 6px 12px;
       border: 1px solid #ccc;
       border-radius: 8px;
-      font-size: 14px;
+      font-size: 12px;
       background-color: #fff;
       color: #333;
       cursor: pointer;
       transition: border-color 0.2s ease-in-out;
+
+      @media (min-width: 768px) {
+        font-size: 13px;
+      }
+
+      @media (min-width: 1024px) {
+        font-size: 14px;
+      }
 
       &:hover {
         border-color: #999;
@@ -59,6 +84,45 @@
       &:focus {
         outline: none;
         border-color: #2a2a2a;
+      }
+    }
+
+    .sort-buttons {
+      display: flex;
+      gap: 4px;
+    }
+
+    .sort-btn {
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 12px;
+      background-color: #fff;
+      color: #333;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+
+      @media (min-width: 768px) {
+        font-size: 13px;
+      }
+
+      @media (min-width: 1024px) {
+        font-size: 14px;
+      }
+
+      &:hover {
+        border-color: #999;
+        background-color: #f5f5f5;
+      }
+
+      &.active {
+        background-color: #2a2a2a;
+        color: #fff;
+        border-color: #2a2a2a;
+      }
+
+      &:focus {
+        outline: none;
       }
     }
   }

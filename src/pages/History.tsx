@@ -23,6 +23,7 @@ function History() {
   ];
 
   const [selectedTheme, setSelectedTheme] = useState('전체');
+  const [sortOrder, setSortOrder] = useState<'high' | 'low' | null>(null);
 
   const toggleTodoStatus = (id: number) => {
     setTodoList((prev) =>
@@ -33,8 +34,29 @@ function History() {
   const filteredData =
     selectedTheme === '전체' ? todoList : todoList.filter((todo) => todo.theme === selectedTheme);
 
-  const todoListActive = filteredData.filter((todo) => !todo.completed);
-  const todoListCompleted = filteredData.filter((todo) => todo.completed);
+  const sortByPriority = (list: typeof todoList) => {
+    if (!sortOrder) return list;
+    return [...list].sort((a, b) =>
+      sortOrder === 'high' ? b.priority - a.priority : a.priority - b.priority,
+    );
+  };
+
+  const groupByTheme = (list: typeof todoList) => {
+    const grouped: { [key: string]: typeof todoList } = {};
+    list.forEach((todo) => {
+      if (!grouped[todo.theme]) {
+        grouped[todo.theme] = [];
+      }
+      grouped[todo.theme].push(todo);
+    });
+    return grouped;
+  };
+
+  const todoListActive = sortByPriority(filteredData.filter((todo) => !todo.completed));
+  const todoListCompleted = sortByPriority(filteredData.filter((todo) => todo.completed));
+
+  const groupedActive = groupByTheme(todoListActive);
+  const groupedCompleted = groupByTheme(todoListCompleted);
 
   // todoList가 완전히 비어있으면 EmptyMain 표시
   if (todoList.length === 0) {
@@ -49,31 +71,55 @@ function History() {
             <img src={iconOpenedFolder} alt='icon_opened_folder' className='history-header-icon' />
             해야할 목록
           </div>
-          <select
-            className='theme-select'
-            value={selectedTheme}
-            onChange={(e) => setSelectedTheme(e.target.value)}
-          >
-            {themes.map((theme) => (
-              <option key={theme} value={theme}>
-                {theme}
-              </option>
-            ))}
-          </select>
+          <div className='filter-group'>
+            <select
+              className='theme-select'
+              value={selectedTheme}
+              onChange={(e) => setSelectedTheme(e.target.value)}
+            >
+              {themes.map((theme) => (
+                <option key={theme} value={theme}>
+                  {theme}
+                </option>
+              ))}
+            </select>
+            <div className='sort-buttons'>
+              <button
+                className={`sort-btn ${sortOrder === 'high' ? 'active' : ''}`}
+                onClick={() => setSortOrder(sortOrder === 'high' ? null : 'high')}
+              >
+                높은순
+              </button>
+              <button
+                className={`sort-btn ${sortOrder === 'low' ? 'active' : ''}`}
+                onClick={() => setSortOrder(sortOrder === 'low' ? null : 'low')}
+              >
+                낮은순
+              </button>
+            </div>
+          </div>
         </div>
 
         <div className='todo-section'>
           {todoListActive.length > 0 ? (
-            todoListActive.map((todo) => (
-              <div key={todo.id} className='todo-block'>
-                <p className='todo-theme'>{todo.theme}</p>
-                <div onClick={() => navigate(`/management/${todo.id}`)} className='todo-clickable'>
-                  <TodoCard
-                    task={todo.task}
-                    priority={todo.priority}
-                    isOn={todo.completed}
-                    onToggle={() => toggleTodoStatus(todo.id)}
-                  />
+            Object.entries(groupedActive).map(([theme, todos]) => (
+              <div key={theme} className='theme-group'>
+                <p className='todo-theme'>{theme}</p>
+                <div className='theme-cards'>
+                  {todos.map((todo) => (
+                    <div
+                      key={todo.id}
+                      onClick={() => navigate(`/management/${todo.id}`)}
+                      className='todo-clickable'
+                    >
+                      <TodoCard
+                        task={todo.task}
+                        priority={todo.priority}
+                        isOn={todo.completed}
+                        onToggle={() => toggleTodoStatus(todo.id)}
+                      />
+                    </div>
+                  ))}
                 </div>
               </div>
             ))
@@ -91,16 +137,24 @@ function History() {
 
         <div className='todo-section'>
           {todoListCompleted.length > 0 ? (
-            todoListCompleted.map((todo) => (
-              <div key={todo.id} className='todo-block'>
-                <p className='todo-theme'>{todo.theme}</p>
-                <div onClick={() => navigate(`/management/${todo.id}`)} className='todo-clickable'>
-                  <TodoCard
-                    task={todo.task}
-                    priority={todo.priority}
-                    isOn={todo.completed}
-                    onToggle={() => toggleTodoStatus(todo.id)}
-                  />
+            Object.entries(groupedCompleted).map(([theme, todos]) => (
+              <div key={theme} className='theme-group'>
+                <p className='todo-theme'>{theme}</p>
+                <div className='theme-cards'>
+                  {todos.map((todo) => (
+                    <div
+                      key={todo.id}
+                      onClick={() => navigate(`/management/${todo.id}`)}
+                      className='todo-clickable'
+                    >
+                      <TodoCard
+                        task={todo.task}
+                        priority={todo.priority}
+                        isOn={todo.completed}
+                        onToggle={() => toggleTodoStatus(todo.id)}
+                      />
+                    </div>
+                  ))}
                 </div>
               </div>
             ))
