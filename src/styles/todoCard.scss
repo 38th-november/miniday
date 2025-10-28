@@ -19,24 +19,20 @@
     .todo-task {
       flex: 1;
       min-width: 0;
-      font-size: 14px;
+      font-size: 13px;
       color: #333;
       word-break: keep-all;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-    }
 
-    .todo-priority {
-      display: flex;
-      gap: 4px;
-      flex-shrink: 0;
-    }
+      @media (min-width: 768px) {
+        font-size: 14px;
+      }
 
-    .heart-icon {
-      width: 20px;
-      height: 20px;
-      flex-shrink: 0;
+      @media (min-width: 1024px) {
+        font-size: 15px;
+      }
     }
 
     .on-off-btn {
@@ -64,5 +60,24 @@
         outline: none;
       }
     }
+  }
+}
+
+.todo-priority {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+  align-items: center;
+
+  .todo-priority-count {
+    font-size: 14px;
+    font-weight: bold;
+    color: #505050;
+  }
+
+  .todo-priority-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
   }
 }

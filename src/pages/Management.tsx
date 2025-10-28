@@ -5,6 +5,7 @@ import TaskInput from '../components/TaskInput';
 import Priority from '../components/Priority';
 import Button from '../components/Button';
 import { TodoContext, Todo } from '../context/TodoContext';
+import iconClock from '../assets/icons/icon_clock.png';
 import '../styles/management.scss';
 function Management() {
   const { id } = useParams<{ id: string }>();
@@ -80,7 +81,10 @@ function Management() {
       <div className='management-box'>
         <div className='management-header'>
           <h3>할 일</h3>
-          <span>DATE ♥ {formatDate(todo.createdAt)}</span>
+          <div className='management-date'>
+            <img src={iconClock} alt='clock icon' className='clock-icon' />
+            {formatDate(todo.createdAt)}
+          </div>
         </div>
 
         <div className='management-container'>

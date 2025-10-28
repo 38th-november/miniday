@@ -1,8 +1,9 @@
+/// <reference types="vite/client" />
+
 import { useContext } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.scss';
 import { TodoContext, TodoProvider } from './context/TodoContext';
-import Footer from './layouts/Footer';
 import MainLayout from './layouts/MainLayout';
 import Add from './pages/Add';
 import EmptyMain from './pages/EmptyMain';
@@ -13,26 +14,21 @@ function AppRoutes() {
   const { todoList } = useContext(TodoContext);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <div style={{ flex: 1 }}>
-        <Routes>
-          <Route element={<MainLayout />}>
-            <Route path='/' element={todoList.length > 0 ? <History /> : <EmptyMain />} />
-            <Route path='/add' element={<Add />} />
-            <Route path='/history' element={<History />} />
-            <Route path='/management/:id' element={<Management />} />
-          </Route>
-        </Routes>
-      </div>
-      <Footer />
-    </div>
+    <Routes>
+      <Route element={<MainLayout />}>
+        <Route index element={todoList.length > 0 ? <History /> : <EmptyMain />} />
+        <Route path='/add' element={<Add />} />
+        <Route path='/history' element={<History />} />
+        <Route path='/management/:id' element={<Management />} />
+      </Route>
+    </Routes>
   );
 }
 
 function App() {
   return (
     <TodoProvider>
-      <BrowserRouter basename="/miniday">
+      <BrowserRouter basename={import.meta.env.DEV ? '/' : '/miniday'}>
         <AppRoutes />
       </BrowserRouter>
     </TodoProvider>

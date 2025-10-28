@@ -59,10 +59,10 @@ function Add() {
           <p>3. 얼마나 중요한 일인가요?</p>
           <Priority initial={priority} onChange={setPriority} />
         </div>
-      </div>
-      <div className='button-group'>
-        <Button label='작성' onClick={handleAdd} variant='primary' />
-        <Button label='취소' onClick={handleCancel} variant='opaque' />
+        <div className='button-group'>
+          <Button label='작성' onClick={handleAdd} variant='primary' />
+          <Button label='취소' onClick={handleCancel} variant='opaque' />
+        </div>
       </div>
     </>
   );

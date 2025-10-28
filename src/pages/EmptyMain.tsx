@@ -10,7 +10,7 @@ function EmptyMain() {
     <div className='empty-main-container'>
       <Button
         icon={iconAdd}
-        label='Add something to do.'
+        label='할 일을 입력하세요.'
         variant='transparent'
         onClick={() => navigate('/add')}
       />

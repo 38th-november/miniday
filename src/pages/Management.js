@@ -6,6 +6,7 @@ import TaskInput from '../components/TaskInput';
 import Priority from '../components/Priority';
 import Button from '../components/Button';
 import { TodoContext } from '../context/TodoContext';
+import iconClock from '../assets/icons/icon_clock.png';
 import '../styles/management.scss';
 function Management() {
   const { id } = useParams();
@@ -74,7 +75,17 @@ function Management() {
             className: 'management-header',
             children: [
               _jsx('h3', { children: '\uD560 \uC77C' }),
-              _jsxs('span', { children: ['DATE \u2665 ', formatDate(todo.createdAt)] }),
+              _jsxs('div', {
+                className: 'management-date',
+                children: [
+                  _jsx('img', {
+                    src: iconClock,
+                    alt: 'clock icon',
+                    className: 'clock-icon',
+                  }),
+                  formatDate(todo.createdAt),
+                ],
+              }),
             ],
           }),
           _jsxs('div', {

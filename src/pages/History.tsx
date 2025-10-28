@@ -3,6 +3,9 @@ import { useContext, useState } from 'react';
 import { TodoContext } from '../context/TodoContext';
 import TodoCard from '../components/TodoCard';
 import Button from '../components/Button';
+import EmptyMain from './EmptyMain';
+import iconOpenedFolder from '../assets/icons/icon_opened_folder.png';
+import iconFolder from '../assets/icons/icon_folder.png';
 import '../styles/history.scss';
 
 function History() {
@@ -33,11 +36,19 @@ function History() {
   const todoListActive = filteredData.filter((todo) => !todo.completed);
   const todoListCompleted = filteredData.filter((todo) => todo.completed);
 
+  // todoList가 완전히 비어있으면 EmptyMain 표시
+  if (todoList.length === 0) {
+    return <EmptyMain />;
+  }
+
   return (
     <>
       <div className='history-container'>
         <div className='history-header'>
-          <h3>해야할 목록</h3>
+          <div className='history-header-text'>
+            <img src={iconOpenedFolder} alt='icon_opened_folder' className='history-header-icon' />
+            해야할 목록
+          </div>
           <select
             className='theme-select'
             value={selectedTheme}
@@ -72,7 +83,10 @@ function History() {
         </div>
         <hr />
         <div className='history-header'>
-          <h3>완료된 목록</h3>
+          <div className='history-header-text'>
+            <img src={iconFolder} alt='icon_folder' className='history-header-icon' />
+            완료된 목록
+          </div>
         </div>
 
         <div className='todo-section'>
@@ -96,8 +110,7 @@ function History() {
         </div>
       </div>
 
-      {/* 추가 버튼 */}
-      <div className='add-button-container' style={{ marginTop: '20px', textAlign: 'center' }}>
+      <div className='add-button-container'>
         <Button label='추가' onClick={() => navigate('/add')} variant='primary' />
       </div>
     </>

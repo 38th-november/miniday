@@ -1,7 +1,6 @@
 import '../styles/todoCard.scss';
-import emptyHeart from '../assets/icons/icon_empty_heart_gray.png';
-import fullHeart from '../assets/icons/icon_full_heart_blue.png';
-
+import ideaGray from '../assets/icons/icon_idea_gray.png';
+import ideaColor from '../assets/icons/icon_idea_color.png';
 type TodoCardProps = {
   task: string;
   priority: number;
@@ -10,22 +9,18 @@ type TodoCardProps = {
 };
 
 const TodoCard: React.FC<TodoCardProps> = ({ task, priority, isOn, onToggle }) => {
-  const totalHearts = 5;
-
   return (
     <div className='todo-card'>
       <div className='todo-card-header'>
         <span className='todo-task'>{task}</span>
-        <span className='todo-priority'>
-          {[...Array(totalHearts)].map((_, i) => (
-            <img
-              key={i}
-              src={i < priority ? fullHeart : emptyHeart}
-              alt={i < priority ? 'Full heart' : 'Empty heart'}
-              className='heart-icon'
-            />
-          ))}
-        </span>
+        <div className='todo-priority'>
+          <img
+            src={priority > 0 ? ideaColor : ideaGray}
+            alt={priority > 0 ? 'icon_priority_on' : 'icon_priority_off'}
+            className='todo-priority-icon'
+          />
+          <div className='todo-priority-count'>X {priority}</div>
+        </div>
         <button
           className={`on-off-btn ${isOn ? 'active' : ''}`}
           onClick={(e) => {

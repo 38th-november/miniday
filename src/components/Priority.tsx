@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import emptyHeart from '../assets/icons/icon_empty_heart_gray.png';
-import fullHeart from '../assets/icons/icon_full_heart_blue.png';
+import ideaGray from '../assets/icons/icon_idea_gray.png';
+import ideaColor from '../assets/icons/icon_idea_color.png';
 import '../styles/priority.scss';
 
 type PriorityProps = {
@@ -32,7 +32,7 @@ const Priority: React.FC<PriorityProps> = ({ initial = 0, onChange }) => {
     <div className='priority-container'>
       {Array.from({ length: MAX_SCORE }, (_, i) => i + 1).map((i) => (
         <button key={i} className='priority-btn' onClick={() => handleClick(i)}>
-          <img src={i <= score ? fullHeart : emptyHeart} alt={`priority ${i}`} />
+          <img src={i <= score ? ideaColor : ideaGray} alt={`priority ${i}`} />
         </button>
       ))}
     </div>
